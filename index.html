@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Demo Login + Temas</title>
+
+  <!-- Estilo 1 (claro) -->
+  <style id="estilo1">
+    :root { --bg:#f6f9fb; --card:#ffffff; --text:#0f172a; --muted:#334155; --acc:#0ea5a6; --acc-2:#007774; }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,sans-serif;line-height:1.4}
+    header{padding:24px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;max-width:980px;margin:auto}
+    .brand{font-weight:700;font-size:20px;color:var(--acc-2)}
+    .theme-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .select{padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#0f172a}
+    main{max-width:980px;margin:0 auto;padding:16px;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+    .card{background:var(--card);border:1px solid #e2e8f0;border-radius:16px;padding:20px;box-shadow:0 6px 20px rgba(2,8,23,.06)}
+    h1{margin:0 0 8px 0;font-size:22px}
+    p.muted{margin:0 0 16px 0;color:var(--muted)}
+    label{display:block;margin:12px 0 6px 0;font-weight:600}
+    input[type=text],input[type=password]{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:12px;background:#fff}
+    .row{display:flex;gap:10px;align-items:center;margin-top:12px}
+    .btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;background:linear-gradient(180deg,var(--acc),var(--acc-2));color:#fff;font-weight:700;cursor:pointer}
+    .btn:active{transform:translateY(1px)}
+    .small{font-size:12px;color:var(--muted)}
+    .ok{color:#16a34a;font-weight:700}
+    .bad{color:#b91c1c;font-weight:700}
+    footer{max-width:980px;margin:12px auto 40px auto;padding:0 16px;color:#64748b}
+    .link{color:var(--acc-2);text-decoration:none;border-bottom:1px dashed currentColor}
+    .hint{font-size:12px;margin-top:8px;color:#475569}
+    .toggle{margin-left:6px}
+  </style>
+
+  <!-- Estilo 2 (oscuro) -->
+  <style id="estilo2" disabled>
+    :root { --bg:#0b1220; --card:#0f172a; --text:#e5e7eb; --muted:#94a3b8; --acc:#22d3ee; --acc-2:#38bdf8; }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,rgba(56,189,248,.15),transparent),var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,sans-serif;line-height:1.4}
+    header{padding:24px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;max-width:980px;margin:auto}
+    .brand{font-weight:700;font-size:20px;color:var(--acc)}
+    .theme-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .select{padding:10px 12px;border:1px solid #334155;border-radius:10px;background:#0b1324;color:#e5e7eb}
+    main{max-width:980px;margin:0 auto;padding:16px;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+    .card{background:linear-gradient(180deg,#0f172a,#0b1324);border:1px solid #1f2937;border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    h1{margin:0 0 8px 0;font-size:22px}
+    p.muted{margin:0 0 16px 0;color:var(--muted)}
+    label{display:block;margin:12px 0 6px 0;font-weight:700}
+    input[type=text],input[type=password]{width:100%;padding:12px;border:1px solid #334155;border-radius:12px;background:#0b1324;color:#e5e7eb}
+    .row{display:flex;gap:10px;align-items:center;margin-top:12px}
+    .btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;background:linear-gradient(180deg,var(--acc),var(--acc-2));color:#0b1220;font-weight:900;cursor:pointer}
+    .btn:active{transform:translateY(1px)}
+    .small{font-size:12px;color:var(--muted)}
+    .ok{color:#22c55e;font-weight:800}
+    .bad{color:#ef4444;font-weight:800}
+    footer{max-width:980px;margin:12px auto 40px auto;padding:0 16px;color:#94a3b8}
+    .link{color:var(--acc-2);text-decoration:none;border-bottom:1px dashed currentColor}
+    .hint{font-size:12px;margin-top:8px;color:#9ca3af}
+    .toggle{margin-left:6px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">UMG PARCIAL 1 DESARROLLO 3590-22-8409</div>
+    <div class="theme-controls">
+      <label class="small" for="tema">Tema:</label>
+      <select id="tema" class="select" aria-label="Selector de tema">
+        <option value="estilo1">Estilo 1 (claro)</option>
+        <option value="estilo2">Estilo 2 (oscuro)</option>
+        <option value="ninguno">Sin estilo</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <!-- Tarjeta de Login -->
+    <section class="card" aria-labelledby="login-title">
+      <h1 id="login-title">Ingreso al sitio</h1>
+      <p class="muted">Use las credenciales de prueba: <b>umg</b> / <b>admin</b>.</p>
+
+      <form id="formLogin" novalidate>
+        <label for="usuario">Usuario</label>
+        <input id="usuario" name="usuario" type="text" placeholder="Ingrese su usuario" autocomplete="username" required />
+
+        <label for="clave">Contraseña</label>
+        <input id="clave" name="clave" type="password" placeholder="Ingrese su contraseña" autocomplete="current-password" required />
+        <div class="row">
+          <input id="ver" type="checkbox" class="toggle" />
+          <label for="ver" class="small">Mostrar contraseña</label>
+        </div>
+
+        <div class="row">
+          <button type="submit" class="btn">Ingresar</button>
+          <span id="estado" class="small" role="status" aria-live="polite"></span>
+        </div>
+        <div class="hint">La verificación se hace en el navegador solo para fines de demostración.</div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Estanly Jesua Fabian Vasquez</p>
+  </footer>
+
+  <script>
+    // ====== Selector de tema ======
+    const estilo1 = document.getElementById('estilo1');
+    const estilo2 = document.getElementById('estilo2');
+    const selector = document.getElementById('tema');
+
+    const guardado = localStorage.getItem('tema') || 'estilo1';
+    selector.value = guardado;
+    aplicarTema(guardado);
+
+    selector.addEventListener('change', (e) => {
+      const val = e.target.value;
+      aplicarTema(val);
+      localStorage.setItem('tema', val);
+    });
+
+    function aplicarTema(val) {
+      if (val === 'estilo1') {
+        estilo1.disabled = false;
+        estilo2.disabled = true;
+        document.body.style = '';
+      } else if (val === 'estilo2') {
+        estilo1.disabled = true;
+        estilo2.disabled = false;
+        document.body.style = '';
+      } else {
+        estilo1.disabled = true;
+        estilo2.disabled = true;
+        document.body.style = '';
+      }
+    }
+
+    // ====== Login simple ======
+    const form = document.getElementById('formLogin');
+    const usuario = document.getElementById('usuario');
+    const clave = document.getElementById('clave');
+    const estado = document.getElementById('estado');
+    const ver = document.getElementById('ver');
+
+    ver.addEventListener('change', () => {
+      clave.type = ver.checked ? 'text' : 'password';
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = (usuario.value || '').trim();
+      const p = (clave.value || '').trim();
+      const ok = (u === 'umg' && p === 'admin');
+      estado.textContent = ok ? '✅ Login exitoso. Bienvenido.' : '❌ Usuario o contraseña incorrectos.';
+      estado.className = ok ? 'ok' : 'bad';
+      if (ok) form.reset();
+    });
+  </script>
+</body>
+</html>
